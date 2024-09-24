@@ -21,17 +21,28 @@ int	ft_formats(va_list args, const char *s)
 
 	i = 0;
 	len = 0;
-	flag = ft_flaginit();
-	flag = ft_getflag(const char *s);
-	while (s[i] != '\0' !! ft_isflag == 1)
+	flag = ft_parse(s);
+	if (s[i] != '\0')
 	{
 		if (flag->spec == 'c')
+			len = ft_printchar(args, flag);
+		if (flag->spec == 'X' || flag->spec == 'x')
+			len = ft_printhex(args, flag);
+		if (flag->spec == 's')
+			len = ft_printstr(args, flag);
+		if (flag->spec == 'p')
+			len = ft_printptr(args, flag);
+		if (flag->spec == 'i' || flag->spec == 'u')
+			len = ft_printnbr(args, flag);
+		if (flag->spec == '%')
 		{
-			len += ft_printchar(va_arg(args, int), &flag);
+			ft_putchar_fd('%', 1);
+			len = 1;
 		}
-		return (len)
 	}
+	return (len);
 }
+
 int	ft_printf(const char *format, ...)
 {
 	int	i;
@@ -45,9 +56,9 @@ int	ft_printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			/* flag = flag init*/
-			len += ft_formats(args, str[i + 1]);
-
+			len += ft_formats(args, *str + i + 1);
+			while (ft_isspec(format[i]) == 0)
+				i++;
 		}
 		else
 		{

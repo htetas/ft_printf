@@ -12,8 +12,28 @@
 
 #include "libft.h"
 
-int	ft_printchar(int c)
+int	ft_printchar(va_list args, t_flag flag)
 {
-	ft_putchar_fd(c, 1);
-	return (1);
+	int	len;
+	char	c;
+	char	pad;
+
+	len = 0;
+	pad = ' ';
+	if (flag->minus == 0 && flag->zero == 1)
+		pad = '0';
+	c = (char)va_arg(args, int);
+	while (flag->minus == 0 && len < flag->width - 1)
+	{
+		write(1, &pad, 1);
+		len++;
+	}
+	write(1, &c, 1);
+	len++;
+	while (flag->minus == 1 && len < flag->width)
+	{
+		write(1, " ", 1);
+		len++;
+	}
+	return (len);
 }

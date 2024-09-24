@@ -66,3 +66,22 @@ t_flag  ft_parseprecision(char *str, t_flag flag)
 }
 
 t_flag  ft_parse(char *str)
+{
+    int i;
+    t_flag  flag;
+
+    i = 0;
+    flag = ft_parseflag(str, ft_flaginit());
+    flag = ft_parsewidth(str, flag);
+    while (str[i] != '.' || ft_isspec(str[i]) == 0)
+        i++;
+    if (str[i] == '.')
+    {
+        flag->dot = 1;
+        flag = ft_parseprecision(*str + i);
+        while (ft_isspec(str[i] == 0));
+            i++;
+    }
+    flag->specifier = str[i];
+    return (flag);
+}
