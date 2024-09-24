@@ -14,25 +14,25 @@
 
 int	ft_printstr(va_list args, t_flag flag)
 {
-	int	len;
+	int	count;
 	char	pad;
 	char	*s;
 
 	s = (char *)va_arg(args, char *);
-	len = ft_strlen(s);
+	count = ft_strlen(s);
 	pad = ' ';
 	if (flag.minus == 0 && flag.zero == 1)
 		pad = '0';
-	while (flag.minus == 0 && len < flag.width - 1)
+	while (flag.minus == 0 && count < flag.width - 1)
 	{
 		write(1, &pad, 1);
-		len++;
+		count++;
 	}
 	ft_putstr_fd(s, 1);
-	while (flag.minus == 1 && len < flag.width)
+	while (flag.minus == 1 && count < flag.width)
 	{
 		write(1, " ", 1);
-		len++;
+		count++;
 	}
-	return (len);
+	return (count);
 }

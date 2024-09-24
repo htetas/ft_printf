@@ -24,16 +24,17 @@ bonus:	all
 ${NAME}:	${OBJ}
 		make -C $(LIBFT_PATH) all
 		cp $(LIBFT_PATH)/libft.a ./
+		cp $(LIBFT_PATH)/libft.h ./
 		${AR} ${NAME} ${OBJ} libft.a
 		${LIB} ${NAME}
 
 clean:
 	make -C $(LIBFT_PATH) clean
-	rm -f ${OBJ} ${BOBJ}
+	rm -f ${OBJ}
 
 fclean: clean
 	make -C $(LIBFT_PATH) fclean
-	rm -f ${NAME} libft.a
+	rm -f ${NAME} libft.a libft.h
 
 re:	fclean all
 
