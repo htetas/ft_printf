@@ -42,10 +42,12 @@ void	ft_parseprecision(char *str, t_flag *flag);
 t_flag	ft_parse(char *str);
 int	ft_printchar(va_list args, t_flag flag);
 int	ft_printstr(va_list args, t_flag flag);
-int	ft_isspec (const int c);
+int	ft_isspec(const int c);
+int	ft_padchar(int len, char c);
+void	ft_puthex(unsigned long n, char *base);
+int	ft_hexlen(unsigned long n, int precision);
 int	ft_printhex(va_list args, t_flag flag);
 int ft_printnbr(va_list args, t_flag flag);
 int	ft_printptr(va_list args, t_flag flag);
-
 
 #endif

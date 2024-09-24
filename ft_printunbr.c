@@ -41,10 +41,10 @@ int ft_printunbr(va_list args, t_flag flag)
 
     n = va_arg(args, unsigned int);
     sign = 0;
-    if (n >= 0 && (flag.plus || flag.space))
+    if (flag.plus || flag.space)
         sign = 1;
     count = sign + ft_unumlen(n, flag.precision);
-    if (flag.minus == 0 && flag.zero == 0 && flag.width > len + sign)
+    if (flag.minus == 0 && flag.zero == 0 && flag.width > count)
         count += ft_padchar(flag.width - count, ' ');
     if (flag.plus)
         ft_putchar_fd('+', 1);

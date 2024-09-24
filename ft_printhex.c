@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-void    *ft_putsharp(t_flag flag)
+void    ft_putsharp(t_flag flag)
 {
     if (flag.specifier == 'X')
         ft_putstr_fd("0X", 1);
@@ -8,24 +8,9 @@ void    *ft_putsharp(t_flag flag)
         ft_putstr_fd("0x", 1);
 }
 
-int ft_hexlen(unsigned int n, int precision)
-{
-    int len;
-
-    len = 1;
-    while (n >= 16)
-    {
-        n = n / 16;
-        len++;
-    }
-    if (precision > len)
-        return(precision);
-    return (len);
-}
-
 void    ft_puthex_prec(unsigned int n, int precision, char *base)
 {
-    while (precision > ft_hexlen(n, 0))
+    while (precision > ft_hexlen((unsigned long)n, 0))
     {
         ft_putchar_fd('0', 1);
         precision--;
@@ -47,8 +32,7 @@ int ft_printhex(va_list args, t_flag flag)
     count = 0;
     if (n == 0 && flag.dot && flag.precision == 0)
         return (ft_padchar(flag.width, ' '));
-    else
-        count += ft_hexlen(n, flag.precision);
+    count += ft_hexlen((unsigned long)n, flag.precision);
     if (flag.sharp == 1 && n != 0)
     {
         ft_putsharp(flag);

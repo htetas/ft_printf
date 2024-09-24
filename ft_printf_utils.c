@@ -1,3 +1,5 @@
+#include "ft_printf.h"
+
 int	ft_isspec(const int c)
 {
 	if (c == 'c' || c == 's' || c == 'p' || c == 'd' || c == 'i' \
@@ -25,4 +27,19 @@ void    ft_puthex(unsigned long n, char *base)
     if (n >= 16)
         ft_puthex(n / 16, base);
     ft_putchar_fd(base[n % 16], 1);
+}
+
+int ft_hexlen(unsigned long n, int precision)
+{
+    int len;
+
+    len = 1;
+    while (n >= 16)
+    {
+        n = n / 16;
+        len++;
+    }
+    if (precision > len)
+        return(precision);
+    return (len);
 }
