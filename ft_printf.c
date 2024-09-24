@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "libft.h"
 
 int	ft_formats(va_list args, const char *s)
 {
@@ -31,7 +32,7 @@ int	ft_formats(va_list args, const char *s)
 		return (len)
 	}
 }
-int	ft_printf(const char *s, ...)
+int	ft_printf(const char *format, ...)
 {
 	int	i;
 	int	len;
@@ -39,17 +40,20 @@ int	ft_printf(const char *s, ...)
 
 	i = 0;
 	len = 0;
-	va_start(args, s);
-	while (s[i])
+	va_start(args, format);
+	while (format[i])
 	{
-		if (s[i] == '%')
+		if (format[i] == '%')
 		{
 			/* flag = flag init*/
-			len += ft_formats(args, , str[i + 1], &flag);
+			len += ft_formats(args, str[i + 1]);
 
 		}
 		else
-			len += ft_printchar(str[i]);
+		{
+			len++;
+			ft_putchar_fd(format[i], 1);
+		}
 		i++;
 	}
 	va_end(args);

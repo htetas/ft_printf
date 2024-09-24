@@ -19,11 +19,15 @@
 
 typedef struct s_flag
 {
-	char	format;
-	int	sign;
-	int	minwidth;
-	int	maxwidth;
-	int	length;
+	int	plus;
+	int	space;
+	int	sharp;
+	int	minus;
+	int	zero;
+	int	width;
+	int	dot;
+	int	precision;
+	char	specifier;
 }	t_flag;
 
 #endif

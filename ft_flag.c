@@ -16,9 +16,6 @@ t_flag	*ft_flaginit(void)
 {
 	t_flag	*flag;
 
-	flag = (t_flag *)malloc(sizeof(t_flag));
-	if (flag == NULL)
-		return (NULL);
 	flag->format = '\0';
 	flag->sign = 0;
 	flag->minwidth = 0;
@@ -27,15 +24,10 @@ t_flag	*ft_flaginit(void)
 	return (flag);
 }
 
-void	ft_getflag(const char *s, t_flag *flag)
+char	*ft_getflag(const char *format, size_t start)
 {
-	int	i;
+	size_t	i;
+	char	*flag;
 
-	i = 0;
-	while (s[i] != '\0' || ft_isflagspec(s[i]))
-	{
-		if (ft_isspec(s[i]))
-			flag->format = s[i];
-		if ()
-	}
+	while(format[start] != '\0' || ft_isspec(format[start]) != )
 }
