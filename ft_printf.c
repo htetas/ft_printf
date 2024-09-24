@@ -11,9 +11,8 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft.h"
 
-int	ft_formats(va_list args, const char *s)
+int	ft_formats(va_list args, char *s)
 {
 	int		i;
 	int		len;
@@ -24,17 +23,17 @@ int	ft_formats(va_list args, const char *s)
 	flag = ft_parse(s);
 	if (s[i] != '\0')
 	{
-		if (flag->spec == 'c')
+		if (flag.specifier == 'c')
 			len = ft_printchar(args, flag);
-		if (flag->spec == 'X' || flag->spec == 'x')
+		if (flag.specifier == 'X' || flag.specifier == 'x')
 			len = ft_printhex(args, flag);
-		if (flag->spec == 's')
+		if (flag.specifier == 's')
 			len = ft_printstr(args, flag);
-		if (flag->spec == 'p')
+		if (flag.specifier == 'p')
 			len = ft_printptr(args, flag);
-		if (flag->spec == 'i' || flag->spec == 'u')
+		if (flag.specifier == 'i' || flag.specifier == 'u')
 			len = ft_printnbr(args, flag);
-		if (flag->spec == '%')
+		if (flag.specifier == '%')
 		{
 			ft_putchar_fd('%', 1);
 			len = 1;
@@ -47,17 +46,20 @@ int	ft_printf(const char *format, ...)
 {
 	int	i;
 	int	len;
+	char	*str;
 	va_list	args;
 
 	i = 0;
 	len = 0;
+	str = (char *)format;
 	va_start(args, format);
 	while (format[i])
 	{
 		if (format[i] == '%')
 		{
-			len += ft_formats(args, *str + i + 1);
-			while (ft_isspec(format[i]) == 0)
+			i++;
+			len += ft_formats(args, str + i);
+			while (format[i] && ft_isspec(format[i]) == 0)
 				i++;
 		}
 		else

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 int	ft_printchar(va_list args, t_flag flag)
 {
@@ -20,17 +20,17 @@ int	ft_printchar(va_list args, t_flag flag)
 
 	len = 0;
 	pad = ' ';
-	if (flag->minus == 0 && flag->zero == 1)
+	if (flag.minus == 0 && flag.zero == 1)
 		pad = '0';
 	c = (char)va_arg(args, int);
-	while (flag->minus == 0 && len < flag->width - 1)
+	while (flag.minus == 0 && len < flag.width - 1)
 	{
 		write(1, &pad, 1);
 		len++;
 	}
 	write(1, &c, 1);
 	len++;
-	while (flag->minus == 1 && len < flag->width)
+	while (flag.minus == 1 && len < flag.width)
 	{
 		write(1, " ", 1);
 		len++;

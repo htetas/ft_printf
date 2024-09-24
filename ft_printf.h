@@ -15,7 +15,7 @@
 # define FT_PRINTF_H
 
 # include <stdarg.h>
-# include "libft.h"
+# include "./libft/libft.h"
 
 typedef struct s_flag
 {
@@ -29,5 +29,23 @@ typedef struct s_flag
 	int	precision;
 	char	specifier;
 }	t_flag;
+
+#define HEXLOW	"0123456789abcdef"
+#define HEXUP	"0123456789ABCDEF"
+
+int	ft_printf(const char *format, ...);
+int	ft_formats(va_list args, char *s);
+t_flag	ft_flaginit(void);
+void	ft_parseflag(char *str, t_flag *flag);
+void	ft_parsewidth(char *str, t_flag *flag);
+void	ft_parseprecision(char *str, t_flag *flag);
+t_flag	ft_parse(char *str);
+int	ft_printchar(va_list args, t_flag flag);
+int	ft_printstr(va_list args, t_flag flag);
+int	ft_isspec (const int c);
+int	ft_printhex(va_list args, t_flag flag);
+int ft_printnbr(va_list args, t_flag flag);
+int	ft_printptr(va_list args, t_flag flag);
+
 
 #endif

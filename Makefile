@@ -1,0 +1,40 @@
+SOURCE = ft_isspec.c ft_parse_flag.c ft_printf.c ft_printchar.c ft_printstr.c ft_printhex.c ft_printnbr.c ft_printptr.c
+
+OBJ = ${SOURCE:.c=.o}
+
+NAME = libftprintf.a
+
+LIBFT_PATH = ./libft
+
+CC = cc
+
+CFLAGS = -Wall -Wextra -Werror -I.
+
+AR = ar rcs
+
+LIB = ranlib
+
+all:	${NAME}
+
+.c.o:
+	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+
+bonus:	all
+
+${NAME}:	${OBJ}
+		make -C $(LIBFT_PATH) all
+		cp $(LIBFT_PATH)/libft.a ./
+		${AR} ${NAME} ${OBJ} libft.a
+		${LIB} ${NAME}
+
+clean:
+	make -C $(LIBFT_PATH) clean
+	rm -f ${OBJ} ${BOBJ}
+
+fclean: clean
+	make -C $(LIBFT_PATH) fclean
+	rm -f ${NAME} libft.a
+
+re:	fclean all
+
+.PHONY: all clean fclean re bonus
