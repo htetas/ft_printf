@@ -10,7 +10,7 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -I.
 
-AR = ar rcs
+AR = ar Trcs
 
 LIB = ranlib
 

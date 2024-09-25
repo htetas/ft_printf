@@ -6,7 +6,7 @@
 /*   By: hsoe <hsoe@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 10:58:42 by hsoe              #+#    #+#             */
-/*   Updated: 2024/09/06 11:02:14 by hsoe             ###   ########.fr       */
+/*   Updated: 2024/09/25 12:57:10 by hsoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_printchar(va_list args, t_flag flag)
 {
-	int	len;
+	int		len;
 	char	c;
 	char	pad;
 

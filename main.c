@@ -1,7 +1,27 @@
-#include "ft_printf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hsoe <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/25 11:07:15 by hsoe              #+#    #+#             */
+/*   Updated: 2024/09/25 15:42:05 by hsoe             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int main(void)
+#include "ft_printf.h"
+#include <limits.h>
+#include <stdio.h>
+
+int	main(void)
 {
-    ft_printf("%c\n", 'a');
-    return (0);
+	void	*ptr;
+	int	i;
+
+	ptr = NULL;
+	i = printf("%p\n", ptr);
+	printf("%d\n", i);
+//	ft_printf("%p\n", ptr);
+	return (0);
 }
