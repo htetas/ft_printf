@@ -6,7 +6,7 @@
 /*   By: hsoe <hsoe@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 09:39:44 by hsoe              #+#    #+#             */
-/*   Updated: 2024/09/25 15:13:00 by hsoe             ###   ########.fr       */
+/*   Updated: 2024/09/28 13:47:11 by hsoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,17 @@ void	ft_parseflag(char *str, t_flag *flag);
 void	ft_parsewidth(char *str, t_flag *flag);
 void	ft_parseprecision(char *str, t_flag *flag);
 t_flag	ft_parse(char *str);
-int		ft_printchar(va_list args, t_flag flag);
-int		ft_printstr(va_list args, t_flag flag);
+int		ft_printchar(int c, t_flag flag);
+int		ft_printstr(char *s, t_flag flag);
 int		ft_isspec(const int c);
 int		ft_padchar(int len, char c);
 void	ft_puthex(unsigned long n, char *base);
 int		ft_hexlen(unsigned long n, int precision);
-int		ft_printhex(va_list args, t_flag flag);
+int		ft_printhex(unsigned int n, t_flag flag);
+int		ft_unumlen(unsigned int n, int precision);
 void	ft_putunbr(unsigned int n);
-int		ft_printnbr(va_list args, t_flag flag);
-int		ft_printunbr(va_list args, t_flag flag);
-int		ft_printptr(va_list args, t_flag flag);
+int		ft_printnbr(int n, t_flag flag);
+int		ft_printunbr(unsigned int n, t_flag flag);
+int		ft_printptr(unsigned long ptr, t_flag flag);
 
 #endif

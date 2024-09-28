@@ -6,7 +6,7 @@
 /*   By: hsoe <hsoe@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 10:45:21 by hsoe              #+#    #+#             */
-/*   Updated: 2024/09/25 13:28:05 by hsoe             ###   ########.fr       */
+/*   Updated: 2024/09/28 11:47:22 by hsoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_parseflag(char *str, t_flag *flag)
 	int	i;
 
 	i = 0;
-	while (str[i] != '.' && ft_isspec(str[i]) != 1)
+	while (str[i] != '.' && !ft_isspec(str[i]))
 	{
 		if (str[i] == '+')
 			flag->plus = 1;
@@ -56,9 +56,9 @@ void	ft_parsewidth(char *str, t_flag *flag)
 
 	i = 0;
 	specified = 0;
-	while (str[i] != '.' && ft_isspec(str[i]) != 1)
+	while (str[i] != '.' && !ft_isspec(str[i]))
 	{
-		if (str[i] > 0 && str[i] <= 9 && !specified)
+		if (str[i] > '0' && str[i] <= '9' && !specified)
 		{
 			flag->width = ft_atoi(str + i);
 			specified = 1;
@@ -74,7 +74,7 @@ void	ft_parseprecision(char *str, t_flag *flag)
 
 	i = 0;
 	specified = 0;
-	while (ft_isspec(str[i]) == 0)
+	while (!ft_isspec(str[i]))
 	{
 		if (ft_isdigit(str[i]) && !specified)
 		{
@@ -94,16 +94,16 @@ t_flag	ft_parse(char *str)
 	flag = ft_flaginit();
 	ft_parseflag(str, &flag);
 	ft_parsewidth(str, &flag);
-	while (str[i] != '.' && ft_isspec(str[i]) == 0 && str[i] != '\0')
+	while (str[i] != '.' && !ft_isspec(str[i]) && str[i] != '\0')
 		i++;
 	if (str[i] == '.')
 	{
 		flag.dot = 1;
 		ft_parseprecision(str + i + 1, &flag);
 	}
-	while (ft_isspec(str[i] == 0) && str[i] != '\0')
+	while (!ft_isspec(str[i]) && str[i] != '\0')
 		i++;
-	if (str[i] != '\0')
+	if (ft_isspec(str[i]))
 		flag.specifier = str[i];
 	return (flag);
 }

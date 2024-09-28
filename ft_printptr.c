@@ -6,26 +6,22 @@
 /*   By: hsoe <hsoe@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 11:15:11 by hsoe              #+#    #+#             */
-/*   Updated: 2024/09/25 15:45:02 by hsoe             ###   ########.fr       */
+/*   Updated: 2024/09/28 10:37:14 by hsoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printptr(va_list args, t_flag flag)
+int	ft_printptr(unsigned long ptr, t_flag flag)
 {
-	unsigned long	ptr;
 	int				count;
-	char			*n;
 
-	ptr = (unsigned long)va_arg(args, void *);
 	count = 0;
 	if (!ptr && flag.dot && flag.precision == 0)
 		return (ft_padchar(flag.width, ' '));
 	if (!ptr)
 	{
-		count += 6;
-		n = "(nil)";
+		return (ft_printstr("(nil)", flag));
 	}
 	else
 		count = 2 + ft_hexlen(ptr, 0);
@@ -36,13 +32,8 @@ int	ft_printptr(va_list args, t_flag flag)
 		else
 			count += ft_padchar(flag.width - count, ' ');
 	}
-	if (!ptr)
-		ft_putstr_fd(n, 1);
-	else
-	{
-		ft_putstr_fd("0x", 1);
-		ft_puthex(ptr, HEXLOW);
-	}
+	ft_putstr_fd("0x", 1);
+	ft_puthex(ptr, HEXLOW);
 	if (flag.minus)
 		count += ft_padchar(flag.width - count, ' ');
 	return (count);

@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsoe <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: hsoe <hsoe@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 11:07:15 by hsoe              #+#    #+#             */
-/*   Updated: 2024/09/25 15:42:05 by hsoe             ###   ########.fr       */
+/*   Updated: 2024/09/28 13:48:37 by hsoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <limits.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 int	main(void)
 {
-	void	*ptr;
 	int	i;
 
-	ptr = NULL;
-	i = printf("%p\n", ptr);
-	printf("%d\n", i);
-//	ft_printf("%p\n", ptr);
+	i = printf("%.03s", "");
+	printf("The count is %d\n", i);
+	i = ft_printf("%.03s", "");
+	printf("The count is %d\n", i);
 	return (0);
 }

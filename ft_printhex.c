@@ -6,7 +6,7 @@
 /*   By: hsoe <hsoe@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 11:15:40 by hsoe              #+#    #+#             */
-/*   Updated: 2024/09/25 11:19:28 by hsoe             ###   ########.fr       */
+/*   Updated: 2024/09/28 10:42:42 by hsoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,15 @@ void	ft_puthex_prec(unsigned int n, int precision, char *base)
 	ft_puthex((unsigned long)n, base);
 }
 
-int	ft_printhex(va_list args, t_flag flag)
+int	ft_printhex(unsigned int n, t_flag flag)
 {
 	int				count;
-	unsigned int	n;
 	char			*base;
 
 	if (flag.specifier == 'X')
 		base = HEXUP;
 	else if (flag.specifier == 'x')
 		base = HEXLOW;
-	n = va_arg(args, unsigned int);
 	count = 0;
 	if (n == 0 && flag.dot && flag.precision == 0)
 		return (ft_padchar(flag.width, ' '));

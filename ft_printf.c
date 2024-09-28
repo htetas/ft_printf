@@ -6,19 +6,18 @@
 /*   By: hsoe <hsoe@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 09:39:10 by hsoe              #+#    #+#             */
-/*   Updated: 2024/09/25 15:23:33 by hsoe             ###   ########.fr       */
+/*   Updated: 2024/09/28 13:46:56 by hsoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 int	ft_printnum(va_list args, t_flag flag)
 {
 	if (flag.specifier == 'i' || flag.specifier == 'd')
-		return (ft_printnbr(args, flag));
+		return (ft_printnbr((int)va_arg(args, int), flag));
 	else
-		return (ft_printunbr(args, flag));
+		return (ft_printunbr((unsigned int)va_arg(args, unsigned int), flag));
 }
 
 int	ft_formats(va_list args, char *s)
@@ -31,13 +30,13 @@ int	ft_formats(va_list args, char *s)
 	if (s)
 	{
 		if (flag.specifier == 'c')
-			len = ft_printchar(args, flag);
+			len = ft_printchar((char)va_arg(args, int), flag);
 		if (flag.specifier == 'X' || flag.specifier == 'x')
-			len = ft_printhex(args, flag);
+			len = ft_printhex((unsigned int)va_arg(args, unsigned int), flag);
 		if (flag.specifier == 's')
-			len = ft_printstr(args, flag);
+			len = ft_printstr((char *)va_arg(args, char *), flag);
 		if (flag.specifier == 'p')
-			len = ft_printptr(args, flag);
+			len = ft_printptr((unsigned long)va_arg(args, void *), flag);
 		if (flag.specifier == 'i' || flag.specifier == 'u' || \
 		flag.specifier == 'd')
 			len = ft_printnum(args, flag);
@@ -65,7 +64,7 @@ int	ft_printf(const char *format, ...)
 		{
 			i++;
 			len += ft_formats(args, (char *)format + i);
-			while (format[i] && ft_isspec(format[i]) == 0)
+			while (format[i] && !ft_isspec(format[i]))
 				i++;
 		}
 		else

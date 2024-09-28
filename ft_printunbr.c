@@ -6,7 +6,7 @@
 /*   By: hsoe <hsoe@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 11:11:03 by hsoe              #+#    #+#             */
-/*   Updated: 2024/09/25 15:23:48 by hsoe             ###   ########.fr       */
+/*   Updated: 2024/09/28 10:39:47 by hsoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,11 @@ void	ft_putunbr_prec(unsigned int n, int precision)
 	ft_putunbr(n);
 }
 
-int	ft_printunbr(va_list args, t_flag flag)
+int	ft_printunbr(unsigned int n, t_flag flag)
 {
 	int				count;
-	unsigned int	n;
 	int				sign;
 
-	n = va_arg(args, unsigned int);
 	sign = 0;
 	if (flag.plus || flag.space)
 		sign = 1;
