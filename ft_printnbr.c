@@ -12,6 +12,13 @@
 
 #include "ft_printf.h"
 
+unsigned int	ft_abs(int n)
+{
+	if (n < 0)
+		return ((unsigned int)-n);
+	return ((unsigned int)n);
+}
+
 int	ft_numlen(int n, int precision)
 {
 	int				len;
@@ -73,7 +80,7 @@ int	ft_printnbr(int n, t_flag flag)
 	}
 	if (!flag.minus && !flag.zero && \
 	flag.width > sign + ft_numlen(n, flag.precision))
-		count += ft_padchar(flag.width - count, ' ');
+		count += ft_padchar(flag.width - (sign + ft_unumlen(ft_abs(n), 0)), ' ');
 	if (n >= 0 && flag.plus)
 		ft_putchar_fd('+', 1);
 	else if (n >= 0 && flag.space)
