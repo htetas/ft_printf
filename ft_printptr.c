@@ -6,7 +6,7 @@
 /*   By: hsoe <hsoe@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 11:15:11 by hsoe              #+#    #+#             */
-/*   Updated: 2024/09/28 10:37:14 by hsoe             ###   ########.fr       */
+/*   Updated: 2024/09/30 16:01:46 by hsoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	ft_printptr(unsigned long ptr, t_flag flag)
 		return (ft_padchar(flag.width, ' '));
 	if (!ptr)
 	{
+		flag.dot = 0;
 		return (ft_printstr("(nil)", flag));
 	}
 	else
@@ -33,7 +34,7 @@ int	ft_printptr(unsigned long ptr, t_flag flag)
 			count += ft_padchar(flag.width - count, ' ');
 	}
 	ft_putstr_fd("0x", 1);
-	ft_puthex(ptr, HEXLOW);
+	ft_puthex(ptr, "0123456789abcdef");
 	if (flag.minus)
 		count += ft_padchar(flag.width - count, ' ');
 	return (count);

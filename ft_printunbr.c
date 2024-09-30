@@ -6,7 +6,7 @@
 /*   By: hsoe <hsoe@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 11:11:03 by hsoe              #+#    #+#             */
-/*   Updated: 2024/09/28 10:39:47 by hsoe             ###   ########.fr       */
+/*   Updated: 2024/09/30 13:57:32 by hsoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,14 @@ int	ft_printunbr(unsigned int n, t_flag flag)
 	int				sign;
 
 	sign = 0;
+	if (n == 0 && flag.dot && flag.precision == 0)
+		return (ft_padchar(flag.width, ' '));
 	if (flag.plus || flag.space)
 		sign = 1;
 	count = sign + ft_unumlen(n, flag.precision);
-	if (flag.minus == 0 && flag.zero == 0 && flag.width > count)
+	if (flag.dot)
+		flag.zero = 0;
+	if (!flag.minus && !flag.zero && flag.width > count)
 		count += ft_padchar(flag.width - count, ' ');
 	if (flag.plus)
 		ft_putchar_fd('+', 1);

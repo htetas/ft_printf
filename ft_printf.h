@@ -6,7 +6,7 @@
 /*   By: hsoe <hsoe@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 09:39:44 by hsoe              #+#    #+#             */
-/*   Updated: 2024/09/28 13:47:11 by hsoe             ###   ########.fr       */
+/*   Updated: 2024/09/30 15:59:55 by hsoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,13 @@ typedef struct s_flag
 	char	specifier;
 }	t_flag;
 
-# define HEXLOW	"0123456789abcdef"
-# define HEXUP	"0123456789ABCDEF"
-
 int		ft_printf(const char *format, ...);
 int		ft_formats(va_list args, char *s);
 t_flag	ft_flaginit(void);
 void	ft_parseflag(char *str, t_flag *flag);
-void	ft_parsewidth(char *str, t_flag *flag);
-void	ft_parseprecision(char *str, t_flag *flag);
-t_flag	ft_parse(char *str);
+void	ft_parsewidth(char *str, t_flag *flag, va_list args);
+void	ft_parseprecision(char *str, t_flag *flag, va_list args);
+t_flag	ft_parse(char *str, va_list args);
 int		ft_printchar(int c, t_flag flag);
 int		ft_printstr(char *s, t_flag flag);
 int		ft_isspec(const int c);

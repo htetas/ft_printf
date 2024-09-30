@@ -6,7 +6,7 @@
 /*   By: hsoe <hsoe@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 11:15:40 by hsoe              #+#    #+#             */
-/*   Updated: 2024/09/28 10:42:42 by hsoe             ###   ########.fr       */
+/*   Updated: 2024/09/30 16:10:33 by hsoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,24 @@ int	ft_printhex(unsigned int n, t_flag flag)
 	char			*base;
 
 	if (flag.specifier == 'X')
-		base = HEXUP;
+		base = "0123456789ABCDEF";
 	else if (flag.specifier == 'x')
-		base = HEXLOW;
+		base = "0123456789abcdef";
 	count = 0;
-	if (n == 0 && flag.dot && flag.precision == 0)
+	if (n == 0)
+		flag.sharp = 0;
+	if (flag.sharp)
+		count += 2;
+	if (flag.dot)
+		flag.zero = 0;
+	if (n == 0 && flag.dot && !flag.precision)
 		return (ft_padchar(flag.width, ' '));
 	count += ft_hexlen((unsigned long)n, flag.precision);
+	if (!flag.minus && !flag.zero && flag.width > count)
+		count += ft_padchar(flag.width - count, ' ');
 	if (flag.sharp == 1 && n != 0)
-	{
 		ft_putsharp(flag);
-		count += 2;
-	}
-	if (flag.zero && flag.dot == 0 && flag.minus == 0)
+	if (flag.zero && !flag.dot && !flag.minus)
 		count += ft_padchar(flag.width - count, '0');
 	ft_puthex_prec(n, flag.precision, base);
 	if (flag.minus && flag.width > count)

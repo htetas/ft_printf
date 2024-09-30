@@ -6,7 +6,7 @@
 /*   By: hsoe <hsoe@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 11:00:38 by hsoe              #+#    #+#             */
-/*   Updated: 2024/09/28 13:47:19 by hsoe             ###   ########.fr       */
+/*   Updated: 2024/09/30 10:54:37 by hsoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_printstr(char *s, t_flag flag)
 	int		count;
 	char	pad;
 
-	if (!s && flag.dot && flag.precision == 0)
+	if (!s && flag.dot && flag.precision < (int)ft_strlen("(null)"))
 		return (ft_padchar(flag.width, ' '));
 	if (!s)
 		s = (char *)"(null)";

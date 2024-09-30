@@ -6,7 +6,7 @@
 /*   By: hsoe <hsoe@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 09:39:10 by hsoe              #+#    #+#             */
-/*   Updated: 2024/09/28 13:46:56 by hsoe             ###   ########.fr       */
+/*   Updated: 2024/09/30 15:28:27 by hsoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_formats(va_list args, char *s)
 	t_flag	flag;
 
 	len = 0;
-	flag = ft_parse(s);
+	flag = ft_parse(s, args);
 	if (s)
 	{
 		if (flag.specifier == 'c')
@@ -40,7 +40,7 @@ int	ft_formats(va_list args, char *s)
 		if (flag.specifier == 'i' || flag.specifier == 'u' || \
 		flag.specifier == 'd')
 			len = ft_printnum(args, flag);
-		if (flag.specifier == '%')
+		if (flag.specifier == '%' || flag.specifier == 0)
 		{
 			ft_putchar_fd('%', 1);
 			len = 1;
@@ -52,6 +52,7 @@ int	ft_formats(va_list args, char *s)
 int	ft_printf(const char *format, ...)
 {
 	int		i;
+	int		n;
 	int		len;
 	va_list	args;
 
@@ -62,10 +63,13 @@ int	ft_printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
+			n = i;
 			i++;
 			len += ft_formats(args, (char *)format + i);
 			while (format[i] && !ft_isspec(format[i]))
 				i++;
+			if (!format[i])
+				i = n;
 		}
 		else
 		{

@@ -6,7 +6,7 @@
 /*   By: hsoe <hsoe@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 10:45:21 by hsoe              #+#    #+#             */
-/*   Updated: 2024/09/28 11:47:22 by hsoe             ###   ########.fr       */
+/*   Updated: 2024/09/30 10:49:58 by hsoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_parseflag(char *str, t_flag *flag)
 	}
 }
 
-void	ft_parsewidth(char *str, t_flag *flag)
+void	ft_parsewidth(char *str, t_flag *flag, va_list args)
 {
 	int	i;
 	int	specified;
@@ -63,11 +63,16 @@ void	ft_parsewidth(char *str, t_flag *flag)
 			flag->width = ft_atoi(str + i);
 			specified = 1;
 		}
+		else if (str[i] == '*' && !specified)
+		{
+			flag->width = (int)va_arg(args, int);
+			specified = 1;
+		}
 		i++;
 	}
 }
 
-void	ft_parseprecision(char *str, t_flag *flag)
+void	ft_parseprecision(char *str, t_flag *flag, va_list args)
 {
 	int	i;
 	int	specified;
@@ -81,11 +86,16 @@ void	ft_parseprecision(char *str, t_flag *flag)
 			flag->precision = ft_atoi(str + i);
 			specified = 1;
 		}
+		else if (str[i] == '*' && !specified)
+		{
+			flag->precision = (int)va_arg(args, int);
+			specified = 1;
+		}
 		i++;
 	}
 }
 
-t_flag	ft_parse(char *str)
+t_flag	ft_parse(char *str, va_list args)
 {
 	int		i;
 	t_flag	flag;
@@ -93,13 +103,13 @@ t_flag	ft_parse(char *str)
 	i = 0;
 	flag = ft_flaginit();
 	ft_parseflag(str, &flag);
-	ft_parsewidth(str, &flag);
+	ft_parsewidth(str, &flag, args);
 	while (str[i] != '.' && !ft_isspec(str[i]) && str[i] != '\0')
 		i++;
 	if (str[i] == '.')
 	{
 		flag.dot = 1;
-		ft_parseprecision(str + i + 1, &flag);
+		ft_parseprecision(str + i + 1, &flag, args);
 	}
 	while (!ft_isspec(str[i]) && str[i] != '\0')
 		i++;
