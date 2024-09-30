@@ -12,18 +12,7 @@
 
 #include "ft_printf.h"
 
-<<<<<<< HEAD
 int	ft_numlen(int n, t_flag flag)
-=======
-unsigned int	ft_abs(int n)
-{
-	if (n < 0)
-		return ((unsigned int)-n);
-	return ((unsigned int)n);
-}
-
-int	ft_numlen(int n, int precision)
->>>>>>> refs/remotes/origin/main
 {
 	int				len;
 	unsigned int	nb;
@@ -85,13 +74,8 @@ int	ft_printnbr(int n, t_flag flag)
 	if (flag.dot)
 		flag.zero = 0;
 	if (!flag.minus && !flag.zero && \
-<<<<<<< HEAD
 	flag.width > sign + ft_numlen(n, flag))
 		count += ft_padchar(flag.width - (ft_numlen(n, flag) + sign), ' ');
-=======
-	flag.width > sign + ft_numlen(n, flag.precision))
-		count += ft_padchar(flag.width - (sign + ft_unumlen(ft_abs(n), 0)), ' ');
->>>>>>> refs/remotes/origin/main
 	if (n >= 0 && flag.plus)
 		ft_putchar_fd('+', 1);
 	else if (n >= 0 && flag.space)
