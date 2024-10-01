@@ -6,7 +6,7 @@
 /*   By: hsoe <hsoe@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 10:58:42 by hsoe              #+#    #+#             */
-/*   Updated: 2024/09/28 10:21:49 by hsoe             ###   ########.fr       */
+/*   Updated: 2024/10/01 11:15:55 by hsoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,16 @@
 
 int	ft_printchar(int c, t_flag flag)
 {
-	int		len;
-	char	pad;
+	int		count;
 
-	len = 0;
-	pad = ' ';
+	count = 0;
 	if (!c)
-	{
 		c = 0;
-	}
-	if (flag.minus == 0 && flag.zero == 1)
-		pad = '0';
-	while (flag.minus == 0 && len < flag.width - 1)
-	{
-		write(1, &pad, 1);
-		len++;
-	}
+	if (flag.minus == 0 && flag.width > 1)
+		count += ft_padchar(flag.width - 1, ' ');
 	write(1, &c, 1);
-	len++;
-	while (flag.minus == 1 && len < flag.width)
-	{
-		write(1, " ", 1);
-		len++;
-	}
-	return (len);
+	count++;
+	if (flag.minus == 1 && count < flag.width)
+		count += ft_padchar(flag.width - count, ' ');
+	return (count);
 }

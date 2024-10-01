@@ -6,7 +6,7 @@
 /*   By: hsoe <hsoe@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 11:15:40 by hsoe              #+#    #+#             */
-/*   Updated: 2024/09/30 16:10:33 by hsoe             ###   ########.fr       */
+/*   Updated: 2024/10/01 10:56:21 by hsoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,19 @@ void	ft_puthex_prec(unsigned int n, int precision, char *base)
 	ft_puthex((unsigned long)n, base);
 }
 
+char	*ft_findbase(char specifier)
+{
+	if (specifier == 'X')
+		return ("0123456789ABCDEF");
+	return ("0123456789abcdef");
+}
+
 int	ft_printhex(unsigned int n, t_flag flag)
 {
 	int				count;
 	char			*base;
 
-	if (flag.specifier == 'X')
-		base = "0123456789ABCDEF";
-	else if (flag.specifier == 'x')
-		base = "0123456789abcdef";
+	base = ft_findbase(flag.specifier);
 	count = 0;
 	if (n == 0)
 		flag.sharp = 0;
