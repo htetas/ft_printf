@@ -6,7 +6,7 @@
 /*   By: hsoe <hsoe@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 09:39:10 by hsoe              #+#    #+#             */
-/*   Updated: 2024/10/01 11:01:36 by hsoe             ###   ########.fr       */
+/*   Updated: 2024/10/03 11:17:53 by hsoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	ft_findindex(const char *format, int start)
 			return (start + i);
 		i++;
 	}
-	return (start);
+	return (start - 1);
 }
 
 int	ft_printf(const char *format, ...)
@@ -76,15 +76,16 @@ int	ft_printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			i++;
+			if (format[++i] == '\0')
+			{
+				va_end(args);
+				return (-1);
+			}
 			len += ft_formats(args, (char *)format + i);
 			i = ft_findindex(format, i);
 		}
 		else
-		{
-			len++;
-			ft_putchar_fd(format[i], 1);
-		}
+			len += ft_printchar(format[i], ft_flaginit());
 		i++;
 	}
 	va_end(args);

@@ -6,7 +6,7 @@
 /*   By: hsoe <hsoe@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 11:00:38 by hsoe              #+#    #+#             */
-/*   Updated: 2024/09/30 10:54:37 by hsoe             ###   ########.fr       */
+/*   Updated: 2024/10/03 09:14:51 by hsoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,15 @@ void	ft_printstr_prec(char *s, int len)
 int	ft_printstr(char *s, t_flag flag)
 {
 	int		count;
-	char	pad;
 
 	if (!s && flag.dot && flag.precision < (int)ft_strlen("(null)"))
 		return (ft_padchar(flag.width, ' '));
 	if (!s)
 		s = (char *)"(null)";
 	count = ft_pristrlen(s, flag);
-	pad = ' ';
-	if (flag.minus == 0 && flag.zero == 1)
-		pad = '0';
 	while (flag.minus == 0 && count < flag.width)
 	{
-		write(1, &pad, 1);
+		write(1, " ", 1);
 		count++;
 	}
 	ft_printstr_prec(s, ft_pristrlen(s, flag));

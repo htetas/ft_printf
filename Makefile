@@ -1,41 +1,45 @@
-SOURCE = ft_printf_utils.c ft_parse_flag.c ft_printf.c ft_printchar.c ft_printstr.c ft_printhex.c ft_printnbr.c ft_printunbr.c ft_printptr.c
+NAME			=	libftprintf.a
 
-OBJ = ${SOURCE:.c=.o}
+CC				=	gcc
+CFLAGS			=	-Wall -Wextra -Werror
+AR				=	ar
+ARFLAGS 		=	rcs
+RM				=	rm -rf
 
-NAME = libftprintf.a
+SRC				=	ft_printf_utils ft_parse_flag ft_printf ft_printchar ft_printstr ft_printhex ft_printnbr ft_printunbr ft_printptr
+SRCS 			=	$(addsuffix .c, $(SRC))
 
-LIBFT_PATH = ./libft
+OBJ_DIR			=	obj
+OBJS			=	$(SRCS:%.c=$(OBJ_DIR)/%.o)
 
-CC = cc
+LIBFT_PATH		=	./libft
+LIBFT			=	$(LIBFT_PATH)/libft.a
 
-CFLAGS = -Wall -Wextra -Werror -I.
+$(OBJ_DIR)/%.o:		%.c
+					$(CC) $(CFLAGS) -c $< -o $@
 
-AR = ar Trcs
+all:				$(NAME)
 
-LIB = ranlib
+bonus:				all
 
-all:	${NAME}
+$(NAME):			$(LIBFT) $(OBJ_DIR) $(OBJS)
+				cp	$(LIBFT) $(NAME)
+					$(AR) $(ARFLAGS) $(NAME) $(OBJS)
 
-.c.o:
-	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+$(LIBFT):
+					make -C $(LIBFT_PATH) all
 
-bonus:	all
-
-${NAME}:	${OBJ}
-		make -C $(LIBFT_PATH) all
-		cp $(LIBFT_PATH)/libft.a ./
-		cp $(LIBFT_PATH)/libft.h ./
-		${AR} ${NAME} ${OBJ} libft.a
-		${LIB} ${NAME}
+$(OBJ_DIR):
+					mkdir -p $(OBJ_DIR)
 
 clean:
-	make -C $(LIBFT_PATH) clean
-	rm -f ${OBJ}
+					make -C $(LIBFT_PATH) clean
+					$(RM) $(OBJ_DIR)
 
-fclean: clean
-	make -C $(LIBFT_PATH) fclean
-	rm -f ${NAME} libft.a libft.h
+fclean:				clean
+					make -C $(LIBFT_PATH) fclean
+					$(RM) $(NAME)
 
-re:	fclean all
+re:					fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY:				all bonus clean fclean re libft
