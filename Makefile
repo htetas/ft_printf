@@ -1,45 +1,41 @@
-NAME			=	libftprintf.a
+SOURCE = ft_printf_utils.c ft_parse_flag.c ft_printf.c ft_printchar.c ft_printstr.c ft_printhex.c ft_printnbr.c ft_printunbr.c ft_printptr.c
 
-CC				=	gcc
-CFLAGS			=	-Wall -Wextra -Werror
-AR				=	ar
-ARFLAGS 		=	rcs
-RM				=	rm -rf
+OBJ = ${SOURCE:.c=.o}
 
-SRC				=	ft_printf_utils ft_parse_flag ft_printf ft_printchar ft_printstr ft_printhex ft_printnbr ft_printunbr ft_printptr
-SRCS 			=	$(addsuffix .c, $(SRC))
+NAME = libftprintf.a
 
-OBJ_DIR			=	obj
-OBJS			=	$(SRCS:%.c=$(OBJ_DIR)/%.o)
+LIBFT_PATH = ./libft
 
-LIBFT_PATH		=	./libft
-LIBFT			=	$(LIBFT_PATH)/libft.a
+LIBFT = $(LIBFT_PATH)/libft.a
 
-$(OBJ_DIR)/%.o:		%.c
-					$(CC) $(CFLAGS) -c $< -o $@
+CC = cc
 
-all:				$(NAME)
+CFLAGS = -Wall -Wextra -Werror
 
-bonus:				all
+AR = ar rcs
 
-$(NAME):			$(LIBFT) $(OBJ_DIR) $(OBJS)
-				cp	$(LIBFT) $(NAME)
-					$(AR) $(ARFLAGS) $(NAME) $(OBJS)
+all:	${NAME}
+
+.c.o:
+	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+
+bonus:	all
+
+$(NAME):	$(LIBFT) $(OBJ)
+			cp	$(LIBFT) $(NAME)
+				$(AR) $(NAME) $(OBJ)
 
 $(LIBFT):
-					make -C $(LIBFT_PATH) all
-
-$(OBJ_DIR):
-					mkdir -p $(OBJ_DIR)
+			make -C $(LIBFT_PATH) all
 
 clean:
-					make -C $(LIBFT_PATH) clean
-					$(RM) $(OBJ_DIR)
+	make -C $(LIBFT_PATH) clean
+	rm -f ${OBJ}
 
-fclean:				clean
-					make -C $(LIBFT_PATH) fclean
-					$(RM) $(NAME)
+fclean: clean
+	make -C $(LIBFT_PATH) fclean
+	rm -f ${NAME}
 
-re:					fclean all
+re:	fclean all
 
-.PHONY:				all bonus clean fclean re libft
+.PHONY: all clean fclean re bonus libft
